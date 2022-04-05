@@ -1662,7 +1662,7 @@ GameObject:
   - component: {fileID: 1504164632}
   m_Layer: 0
   m_Name: BackGround
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1680,7 +1680,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -4.0344114}
+  m_Offset: {x: 3.6245759, y: -0.69263476}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1691,7 +1691,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20.820002, y: 2.4123406}
+  m_Size: {x: 3.0226798, y: 0.29416764}
   m_EdgeRadius: 0
 --- !u!212 &1504164633
 SpriteRenderer:
@@ -2236,7 +2236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpPower: 20
+  jumpPower: 25
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
