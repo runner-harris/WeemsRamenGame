@@ -29,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
         //Flip player when moving side to side
         if(horizontalInput > 0.01f)
         {
-            transform.localScale = new Vector3(3, 3, 3);
+            transform.localScale = new Vector3(.007f, .007f, 3);
         }
         else if(horizontalInput < -0.01f)
         {
-            transform.localScale = new Vector3(-3, 3, 3);
+            transform.localScale = new Vector3(-.007f, .007f, 3);
         }
         
         //Set animator parameters, false means player is not running
