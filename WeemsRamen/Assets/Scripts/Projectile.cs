@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     private float lifetime;
     private Animator anim;
     private BoxCollider2D boxCollider;
+    [SerializeField] private AudioClip enemySound;
     
 
 
@@ -33,6 +34,11 @@ public class Projectile : MonoBehaviour
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
+
+        if(collision.tag == "Enemy"){
+            SoundManager.instance.PlaySound(enemySound);
+            collision.GetComponent<Health>().TakeDamage(1);
+        }
     }
 
     public void SetDirection(float _direction)

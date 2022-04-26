@@ -12,7 +12,27 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private float wallJumpCooldown;
     private float horizontalInput;
+    private int count;
+    
+    [Header("SFX")]
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip pickupSound;
+    [SerializeField] private AudioClip runSound;
 
+    void Start()
+    {
+        count = 0;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "PickUp")
+        {
+            collision.gameObject.SetActive(false);
+            count += 1;
+            SoundManager.instance.PlaySound(pickupSound);
+        }
+    }
     private void Awake()
     {
         //Grab references for rigidBody and animator from object
@@ -35,6 +55,10 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.localScale = new Vector3(-.007f, .007f, 3);
         }
+        if(horizontalInput > 0 || horizontalInput < 0){
+            if(Input.GetKeyDown(KeyCode.RightArrow) && isGrounded())
+                    SoundManager.instance.PlaySound(runSound);
+        }
         
         //Set animator parameters, false means player is not running
         //Arrow keys are pressed means run is true, animation works
@@ -55,7 +79,11 @@ public class PlayerMovement : MonoBehaviour
                 body.gravityScale = 7;
 
             if (Input.GetKey(KeyCode.Space))
-            Jump();
+            {
+                Jump();
+                if(Input.GetKeyDown(KeyCode.Space) && isGrounded())
+                    SoundManager.instance.PlaySound(jumpSound);
+            }
         }
         else
             wallJumpCooldown += Time.deltaTime;
@@ -100,6 +128,12 @@ public class PlayerMovement : MonoBehaviour
 
     public bool canAttack()
     {
-        return horizontalInput == 0 && isGrounded() && !onWall();
+        return horizontalInput == 0 && !onWall();
+    }
+
+    void EndGame()
+    {
+        if(count >= 3)
+            gameObject.SetActive(false);
     }
 }
