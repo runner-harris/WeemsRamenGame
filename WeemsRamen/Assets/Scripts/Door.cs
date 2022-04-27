@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class Door : MonoBehaviour
    {
        if(collision.tag == "Player")
        {
-           if(collision.transform.position.x < transform.position.x)
-                cam.MoveToNewRoom(nextRoom);
-           else
-                cam.MoveToNewRoom(previousRoom); 
-       }
+            //if(collision.transform.position.x < transform.position.x)
+            //     cam.MoveToNewRoom(nextRoom);
+            //else
+            //     cam.MoveToNewRoom(previousRoom);
+            SceneManager.LoadScene(2);
+
+        }
    }
 }

@@ -56,8 +56,10 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-.007f, .007f, 3);
         }
         if(horizontalInput > 0 || horizontalInput < 0){
-            if(Input.GetKeyDown(KeyCode.RightArrow) && isGrounded())
-                    SoundManager.instance.PlaySound(runSound);
+            if (Input.GetKeyDown(KeyCode.RightArrow) && isGrounded())
+                SoundManager.instance.PlaySound(runSound);
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && isGrounded())
+                SoundManager.instance.PlaySound(runSound);
         }
         
         //Set animator parameters, false means player is not running
@@ -87,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             wallJumpCooldown += Time.deltaTime;
-        
+
+        if(!Input.anyKey)
+            SoundManager.instance.StopSound(runSound);
+
     }
     
     private void Jump()

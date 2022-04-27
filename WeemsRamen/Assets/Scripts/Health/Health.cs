@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Health : MonoBehaviour
   [SerializeField] private float iFramesDuration;
   [SerializeField] private int numberOfFlashes;
   private SpriteRenderer spriteRend;
+
+   
 
   
 
@@ -49,6 +52,10 @@ public class Health : MonoBehaviour
                 
 
             dead = true;
+          }
+          else
+          {
+                SceneManager.LoadScene(3);
           }
       }
   }
