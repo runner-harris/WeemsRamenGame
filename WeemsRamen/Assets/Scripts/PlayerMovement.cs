@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -30,8 +31,12 @@ public class PlayerMovement : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             count += 1;
+            print(count);
             SoundManager.instance.PlaySound(pickupSound);
         }
+        if(count == 6)
+            SceneManager.LoadScene(2);
+
     }
     private void Awake()
     {

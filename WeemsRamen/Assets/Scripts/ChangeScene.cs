@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class ChangeScene : MonoBehaviour
 {
 
-    public GameObject directionsPanel;
-    public GameObject[] directionsUI;
+    public GameObject panel;
+    public GameObject[] panelUI;
 
 
     // Start is called before the first frame update
@@ -24,19 +24,34 @@ public class ChangeScene : MonoBehaviour
     }
 
     public void TransitionScene(int level)
+
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(level);
     }
 
 
     public void OpenDirections()
     {
-        directionsUI[0].SetActive(true);
+        panelUI[0].SetActive(true);
     }
 
     public void CloseDirections()
     {
-        directionsUI[0].SetActive(false);
+        panelUI[0].SetActive(false);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        panelUI[0].SetActive(true);
+        panelUI[1].SetActive(false);
+    }
+    public void Play()
+    {
+        Time.timeScale = 1;
+        panelUI[0].SetActive(false);
+        panelUI[1].SetActive(true);
     }
 
 }

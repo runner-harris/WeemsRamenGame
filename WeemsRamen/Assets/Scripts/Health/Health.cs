@@ -9,8 +9,10 @@ public class Health : MonoBehaviour
   public float currentHealth {get; private set;}
   private Animator anim;
   private bool dead;
+  public GameObject player;
+  public GameObject enemy;
 
-  [Header ("iFrames")]
+    [Header ("iFrames")]
   [SerializeField] private float iFramesDuration;
   [SerializeField] private int numberOfFlashes;
   private SpriteRenderer spriteRend;
@@ -25,14 +27,14 @@ public class Health : MonoBehaviour
       anim = GetComponent<Animator>();
       spriteRend = GetComponent<SpriteRenderer>();
   }
-  public void TakeDamage(float _damage)
+  public void TakeEnemyDamage(float _damage)
   {
       currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
       if(currentHealth > 0)
       {
           //player hurt
-            anim.SetTrigger("hurt");
+            //anim.SetTrigger("hurt");
             StartCoroutine(Invulnerability());
       }
       else
@@ -40,26 +42,46 @@ public class Health : MonoBehaviour
           //player dead
           if(!dead)
           {
-            anim.SetTrigger("die");
-            //Player
-            if(GetComponent<PlayerMovement>() != null)
-                GetComponent<PlayerMovement>().enabled = false;
-
-            //Enemy
-            if(GetComponent<Enemy>() != null){
+                //Enemy
+             if (GetComponent<Enemy>() != null){
                 GetComponent<Enemy>().enabled = false;
-            }
+                enemy.SetActive(false);
+              }
                 
 
             dead = true;
           }
-          else
-          {
-                SceneManager.LoadScene(3);
-          }
       }
   }
-  public void AddHealth(float _value)
+
+    public void TakePlayerDamage(float _damage)
+    {
+        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+
+        if (currentHealth > 0)
+        {
+            //player hurt
+            //anim.SetTrigger("hurt");
+            StartCoroutine(Invulnerability());
+        }
+        else
+        {
+            //player dead
+            if (!dead)
+            {
+                //anim.SetTrigger("die");
+                //Player
+                //if (GetComponent<PlayerMovement>() != null)
+                //    GetComponent<PlayerMovement>().enabled = false;
+                player.SetActive(false);
+                SceneManager.LoadScene(3);
+
+
+                dead = true;
+            }
+        }
+    }
+    public void AddHealth(float _value)
   {
       currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
   }

@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 
         if(collision.tag == "Enemy"){
             SoundManager.instance.PlaySound(enemySound);
-            collision.GetComponent<Health>().TakeDamage(1);
+            collision.GetComponent<Health>().TakeEnemyDamage(1);
         }
     }
 
